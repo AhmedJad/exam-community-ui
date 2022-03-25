@@ -1,0 +1,76 @@
+.navbar {
+    overflow: visible;
+    .navbar-brand {
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+    .user {
+        position: relative;
+        margin-right: auto;
+        padding-left: 20px;
+        .avatar {
+            width: 35px;
+            height: 35px;
+            background-color: #f58a1b;
+            background-repeat: none;
+            background-size: cover;
+            color: white;
+            font-size: 20px;
+        }
+        .menu {
+            padding-bottom: 20px;
+            position: absolute;
+            top: 32px;
+            left: 30px;
+            width: 300px;
+            overflow: visible;
+            z-index: 999;
+            background-color: white;
+            border-radius: 10px;
+            .header {
+                .delete{
+                    display: inline-block;
+                    color: #ad2d2d;
+                    text-decoration: none;
+                }
+                .email {
+                    color: #5f6368;
+                }
+                .delete:hover{
+                    cursor: pointer;
+                }
+            }
+            .edit-image {
+                width: 80px;
+                height: 80px;
+                position: relative;
+                display: inline-block;
+                font-size: 50px;
+                input[type="file"] {
+                    display: none;
+                }
+                .icon {
+                    position: absolute;
+                    width: 25px;
+                    height: 25px;
+                    background-color: white;
+                }
+                .icon {
+                    top: 54px;
+                    left: -4px;
+                }
+                .icon:hover{
+                    cursor: pointer;
+                }
+            }
+            .logout {
+                background: none;
+                padding: 7px;
+                border: 1px solid #bebebf;
+                border-radius: 5px;
+            }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+.email-verification-box{
+    border-radius: 8px;
+     //For small devices
+     @media (max-width: 767px) {
+        border: none !important;
+    }
+    form,.footer {
+        padding: 40px;
+    }
+    .footer {
+        a {
+            display: inline-block;
+            margin-top: 4px;
+            text-decoration: none;
+        }
+        .confirm {
+            text-align: left;
+        }
+    }
+}
