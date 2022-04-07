@@ -1,0 +1,40 @@
+<ngx-spinner></ngx-spinner>
+<div class="exam-list-container">
+    <div *ngIf="folders.length==0&&files.length==0" class="no-exams text-center">
+        <i class="fas fa-file"></i>
+    </div>
+    <div *ngIf="folders.length>0" class="folders">
+        <div class="row container-fluid">
+            <div *ngIf="folders.length>0" class="header text-secondary">مجلدات</div>
+            <ng-container *ngFor="let folder of folders;let i=index">
+                <div (click)="onExamSelected(folder,i,$event)" class="folder border col-lg-2 col-md-3">
+                    <div class="large-icon">
+                        <i class="text-secondary fa-solid fa-folder"></i>
+                    </div>
+                    <div [class.selected]="selectedExam==folder" class="title">
+                        <i class="text-secondary fa-solid fa-folder"></i>
+                        <input [id]="'folders'+folder.id" (focus)="onFocus(folder)" [(ngModel)]=folder.title
+                            (blur)="onBlur(folder)" />
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div *ngIf="files.length>0" class="files">
+        <div class="row container-fluid">
+            <div *ngIf="files.length>0" class="header text-secondary">امتحانات</div>
+            <ng-container *ngFor="let file of files;let i=index">
+                <div (click)="onExamSelected(file,i,$event)" class="file border col-lg-2 col-md-3">
+                    <div class="large-icon">
+                        <i class="text-primary fa-solid fa-file"></i>
+                    </div>
+                    <div [class.selected]="selectedExam==file" class="title">
+                        <i class="text-primary fa-solid fa-file"></i>
+                        <input [id]="'files'+file.id" (focus)="onFocus(file)" [(ngModel)]=file.title
+                            (blur)="onBlur(file)" />
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

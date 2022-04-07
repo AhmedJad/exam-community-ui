@@ -1,0 +1,18 @@
+.exam-administration-container {
+    .scrollable-section {
+        overflow: auto;
+        &.title-height {
+            height: 460px;
+        }
+        &.without-title-height {
+            height: 500px;
+        }
+    }
+    .hidden {
+        display: none;
+    }
+    .exam-title {
+        padding: 15px 18px 0px 0;
+        font-weight: bold;
+    }
+}

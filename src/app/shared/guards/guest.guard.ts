@@ -20,7 +20,7 @@ export class GuestGuard implements CanActivate {
     }
     return this._authClient.verifyToken().pipe(
       map(() => {
-        this._router.navigate(['/home']);
+        this._router.navigate(['exam/administration']);
         return false;
       },
       ), catchError((error) => {

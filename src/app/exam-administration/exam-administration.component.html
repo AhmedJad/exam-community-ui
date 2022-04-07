@@ -1,0 +1,21 @@
+<ngx-spinner></ngx-spinner>
+<div class="exam-administration-container">
+    <navbar></navbar>
+    <div class="border-bottom">
+        <div [class.hidden]="!selectedExam||!selectedExam.title||!examCreationHidden" class="text-secondary exam-title">
+            {{selectedExam?.title}}
+        </div>
+        <actions (actions)="actions=$event" (onSelectAction)="onSelectAction($event)" [selectedItem]="selectedExam">
+        </actions>
+    </div>
+    <div class="scrollable-section"
+        [class.without-title-height]="!selectedExam||!selectedExam.title||!examCreationHidden"
+        [class.title-height]="selectedExam&&selectedExam.title&&examCreationHidden">
+        <exam-list [examCreationHidden]="examCreationHidden" [deleteActionClicked]="deleteActionClicked"
+            (onExamDeleted)="deleteActionClicked=false" [newExam]="newExam" [exams]="exams"
+            (onSelectExam)="onSelectExam($event)" [class.hidden]="!examCreationHidden">
+        </exam-list>
+        <exam-creation (onExamSaved)="selectedAction=''" [selectedAction]="selectedAction" [selectedExam]="selectedExam"
+            [class.hidden]="examCreationHidden"></exam-creation>
+    </div>
+</div>

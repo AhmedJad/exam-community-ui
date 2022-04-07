@@ -1,8 +1,8 @@
 <ngx-spinner></ngx-spinner>
 <nav class="navbar navbar-light border-bottom">
     <a routerLink="/home" class="navbar-brand">
-        <span class="d-none d-lg-inline-block"><b>مجتمع الامتحانات</b></span>
         <img class="rounded" src="assets/images/exam.jpg" />
+        <span class="d-none d-lg-inline-block"><b>مجتمع الامتحانات</b></span>
     </a>
     <div class="user" (clickOutside)="showMenu=false">
         <button [ngStyle]="{ 'background-image': 'url(' + imagePath + ')'}" (click)="showMenu=!showMenu"

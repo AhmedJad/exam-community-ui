@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { pipe, Subject } from 'rxjs';
@@ -20,7 +21,8 @@ export class EmailVerificationComponent implements OnInit, OnDestroy {
   constructor(private _formBuilder: FormBuilder,
     private _authClient: AuthClientService,
     private _router: Router,
-    private _spinner: NgxSpinnerService) {
+    private _spinner: NgxSpinnerService,
+    private _title:Title) {
   }
   public get verification_code() {
     return this.form.get("verification_code") as AbstractControl;
@@ -29,6 +31,7 @@ export class EmailVerificationComponent implements OnInit, OnDestroy {
     this.form = this._formBuilder.group({
       verification_code: ['', [Validators.required]]
     });
+    this._title.setTitle("تسجيل الدخول");
   }
   ngOnDestroy(): void {
     this.unsubscribeAll.next();
@@ -49,7 +52,7 @@ export class EmailVerificationComponent implements OnInit, OnDestroy {
     this._authClient.verifyEmail(this.form.value).pipe(takeUntil(this.unsubscribeAll))
       .subscribe(() => {
         this._spinner.hide();
-        this._router.navigate(["/home"]);
+        this._router.navigate(["exam/administration"]);
       }, (errorResponse) => {
         console.log(errorResponse)
         if (errorResponse.status == 400) {

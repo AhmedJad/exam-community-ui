@@ -65,7 +65,7 @@ export class ResetPasswordComponent implements OnInit,OnDestroy {
       .subscribe((response) => {
         this._token.set(response.access_token);
         this._spinner.hide();
-        this._router.navigate(['home']);
+        this._router.navigate(['exam/administration']);
       }, (error) => {
         if (error.status == 400) {
           this._spinner.hide();

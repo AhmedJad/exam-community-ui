@@ -8,7 +8,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { PasswordMatchValdiator } from 'src/app/shared/validators/password-match.validator';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 const PASSWORD_PATTERN: any
   = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}';

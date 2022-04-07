@@ -1,0 +1,101 @@
+<ngx-spinner></ngx-spinner>
+<div class="exam-creation container-fluid col-md-11">
+    <div class="row">
+        <div class="header mb-4">
+            <h1>نموذج الامتحان</h1>
+            <div>لاضافة اعدادات واسالة الامتحانات</div>
+        </div>
+        <!--form-->
+        <form *ngIf="selectedExam&&!selectedExam.folder" class="row">
+            <!--Exam settings-->
+            <div class="mb-3 col-12">
+                <label class="form-label">العنوان</label>
+                <input (blur)="onTitleBlur()" name="title" type="text" class="form-control form-control"
+                    [(ngModel)]="selectedExam.title">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label class="form-label">تاريخ البداية</label>
+                <input [class.is-invalid]="startDateBeforeCurrent" (blur)="onDateBlur()" name="start_date"
+                    type="datetime-local" class="form-control" [(ngModel)]="selectedExam.start_date">
+                <div class="invalid-feedback">التاريخ قبل التاريخ الحالي</div>
+            </div>
+            <div class="mb-3 col-md-6">
+                <label class="form-label">تاريخ النهاية</label>
+                <input [class.is-invalid]="endDateBeforeCurrent||endDateBeforeStart" (blur)="onDateBlur()"
+                    name="end_date" type="datetime-local" class="form-control" [(ngModel)]="selectedExam.end_date">
+                <div class="invalid-feedback">
+                    <ng-container *ngIf="endDateBeforeCurrent">التاريخ قبل التاريخ الحالي</ng-container>
+                    <ng-container *ngIf="endDateBeforeStart&&!endDateBeforeCurrent">
+                        تاريخ النهاية قبل تاريخ البداية
+                    </ng-container>
+                </div>
+            </div>
+            <div class="col-12 mb-3">
+                <div class="form-check">
+                    <input (change)="onExerciseChange($event)" class="form-check-input" type="checkbox"
+                        [(ngModel)]="selectedExam.exercise" id="flexCheckDefault" name="exercise">
+                    <label class="form-check-label" for="flexCheckDefault">تمرين</label>
+                </div>
+                <div *ngIf="selectedExam.exercise" class="form-check">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="selectedExam.answer_shown"
+                        id="flexCheckDefault" name="answer_shown">
+                    <label class="form-check-label" for="flexCheckDefault">اظهار الاجابة</label>
+                </div>
+            </div>
+            <!--Questions settings-->
+            <div class="col-md-6 mb-3">
+                <label class="form-label">رقم السؤال</label>
+                <select name="questions-numbering" [(ngModel)]="questionNumber" class="form-select">
+                    <option *ngFor="let question of selectedExam.questions;let i=index" [value]="i+1">
+                        {{i+1}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">عدد الاختيارات</label>
+                <input (blur)="changeSelectionsSize()" name="selection_size" [(ngModel)]="selectedExam.selections_size"
+                    class="form-control" type="number">
+            </div>
+            <div class="buttons mb-3">
+                <ul>
+                    <li>
+                        <button (click)="addQuestion()"><i class="fas fa-plus"></i></button>
+                    </li>
+                    <li>
+                        <button (click)="removeCurrentQuestion()" [disabled]="selectedExam.questions.length==1"><i
+                                class="fas fa-minus"></i></button>
+                    </li>
+                </ul>
+            </div>
+            <ng-container *ngFor="let question of selectedExam.questions;let i=index">
+                <!--Questions-->
+                <ng-container *ngIf="(i+1)==questionNumber">
+                    <div class="question col-12 mb-3">
+                        <textarea (blur)="onQuestionBlur(i)" [name]="'question'+i" [(ngModel)]="question.context"
+                            class="form-control"></textarea>
+                    </div>
+                    <div *ngFor="let selection of question.selections;let j=index" class="selection col-md-6 mb-3">
+                        <input (click)="onRadioChoosed(i,j)" [name]="'selection-selected'+i+j"
+                            [(ngModel)]="selection.selected" [value]="true" type="radio">
+                        <textarea (blur)="onSelectionBlur(i,j)" [name]="'selection'+i+j" [(ngModel)]="selection.context"
+                            class="form-control"></textarea>
+                    </div>
+                </ng-container>
+            </ng-container>
+            <div class="buttons mb-3">
+                <ul>
+                    <li>
+                        <button (click)="next()" [disabled]="questionNumber==selectedExam.questions.length">
+                            <i class="fas fa-angle-right"></i>
+                        </button>
+                    </li>
+                    <li>
+                        <button (click)="prev()" [disabled]="questionNumber==1">
+                            <i class="fas fa-angle-left"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
