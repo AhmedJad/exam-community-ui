@@ -1,0 +1,20 @@
+<ngx-spinner></ngx-spinner>
+<div class="exam-solution-container">
+    <div class="fixed-section">
+        <navbar currentPage="exam-solution"></navbar>
+        <div class="border-bottom" [class.hidden]="!selectedUser">
+            <div [class.hidden]="!selectedExam||!selectedExam.title" class="text-secondary exam-title">
+                {{selectedExam?.title}}
+            </div>
+            <actions [examListHidden]="examListHidden" (onSelectAction)="onActionSelected($event)"
+                [selectedExam]="selectedExam"></actions>
+
+        </div>
+    </div>
+    <users-list [class.hidden]="selectedUser" (onUserSelected)="onUserSelected($event)"></users-list>
+    <exams-list (filesTrace)="filesTrace=$event" [selectedAction]="selectedAction" [selectedUser]="selectedUser"
+        [class.hidden]="!selectedUser
+        ||(examListHidden)" (onExamSelected)="onExamSelected($event)" [examListHidden]="examListHidden"></exams-list>
+    <solution (onExamSolved)="selectedAction=''" [selectedAction]="selectedAction" [selectedExam]="selectedExam"
+        [class.hidden]="!selectedUser||!examListHidden"></solution>
+</div>

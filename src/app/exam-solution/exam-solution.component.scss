@@ -1,12 +1,12 @@
-.exam-administration-container {
-    .fixed-section{
+.exam-solution-container {
+    .hidden {
+        display: none;
+    }
+    .fixed-section {
         position: fixed;
         background: white;
         width: 100%;
         z-index: 999;
-    }
-    .hidden {
-        display: none;
     }
     .exam-title {
         padding: 15px 18px 0px 0;

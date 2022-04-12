@@ -96,7 +96,6 @@ export class ExamAdministrationComponent implements OnInit, OnDestroy {
         }
       }
       else {
-        this.selectedExam = null;
         let prevFileId = this.filesTrace[this.filesTrace.length - 2]?.id;
         this._spinner.show(undefined, {
           type: "ball-spin-clockwise",
@@ -121,6 +120,7 @@ export class ExamAdministrationComponent implements OnInit, OnDestroy {
               this.exams = exams;
               this.filesTrace.pop();
               this.actions[5].visible = false;
+              this.selectedExam = null;
             })
         }
       }

@@ -1,0 +1,75 @@
+<ngx-spinner></ngx-spinner>
+<div class="exam-solution container">
+    <div class="row" *ngIf="selectedExam&&!selectedExam.folder">
+        <div *ngIf="!examAvailable()" class="exam-unavialable text-center">
+            <i class="main-icon fas fa-ban"></i>
+            <div class="text-secondary mt-1">هذا الامتحان غير متاح <a (click)="showDates=!showDates;$event.preventDefault()"
+                    href="#">مشاهدة التاريخ </a></div>
+            <div *ngIf="showDates" class="text-secondary mt-1">
+                <i class="text-secondary pl-2 fas fas fa-calendar"></i>
+                {{selectedExam.start_date?selectedExam.start_date.replace("T"," في الساعة "):'لا يوجد تاريخ بداية'}}
+            </div>
+            <div *ngIf="showDates" class="text-secondary mt-1">
+                <i class="text-secondary pl-2 fas fa-calendar"></i>
+                {{selectedExam.end_date?selectedExam.end_date.replace("T"," في الساعة "):'لا يوجد تاريخ نهاية'}}
+            </div>
+        </div>
+        <ng-container *ngIf="examAvailable()">
+            <div *ngIf="!selectedExam.exercise" class="col-md-4 mb-3">
+                <i class="text-secondary fas fa-calendar"></i>
+                {{selectedExam.start_date?selectedExam.start_date.replace("T"," في الساعة "):'لا
+                يوجد تاريخ بداية'}}
+            </div>
+            <div *ngIf="!selectedExam.exercise" class="col-md-4 mb-3">
+                <i class="text-secondary fas fa-calendar"></i>
+                {{selectedExam.start_date?selectedExam.end_date.replace("T"," في الساعة "):'لايوجد
+                تاريخ نهاية'}}
+            </div>
+            <div class="col-md-4 mb-3">
+                <i class="text-secondary fas fa-file-lines"></i>
+                {{selectedExam.exam_solutions?selectedExam.exam_solutions.result:result}}
+                <ng-container *ngIf="!selectedExam.exam_solutions&&!result">لا توجد نتيجة</ng-container>
+            </div>
+            <!--form-->
+            <form>
+                <div class="col-12 p-3 border mb-3">
+                    <ng-container *ngFor="let question of selectedExam.questions;let i=index">
+                        <!--Questions-->
+                        <div *ngIf="(i+1)==questionNumber">
+                            <div class="question mb-3">
+                                ({{i+1}}) {{question.context}}
+                            </div>
+                            <div *ngFor="let selection of question.selections;let j=index" class="selection mb-3">
+                                <span class="numbering">{{j+1}} . </span> <input (click)="onRadioChoosed(i,j)"
+                                    [name]="'selection-selected'+i+j" [(ngModel)]="selection.selected" [value]="true"
+                                    type="radio">
+                                <span [class.text-primary]="correctAnswer(i,j)" class="context">
+                                    {{selection.context}}</span>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="questions-nav col-12">
+                    <select name="questions-numbering" [(ngModel)]="questionNumber"
+                        class="questions-numbering form-select">
+                        <option *ngFor="let question of selectedExam.questions;let i=index" [value]="i+1">
+                            {{i+1}}
+                        </option>
+                    </select>
+                    <ul>
+                        <li>
+                            <button (click)="next()" [disabled]="questionNumber==selectedExam.questions.length">
+                                <i class="fas fa-angle-right"></i>
+                            </button>
+                        </li>
+                        <li>
+                            <button (click)="prev()" [disabled]="questionNumber==1">
+                                <i class="fas fa-angle-left"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </ng-container>
+    </div>
+</div>

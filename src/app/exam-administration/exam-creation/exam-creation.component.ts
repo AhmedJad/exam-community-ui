@@ -1,4 +1,5 @@
 import { ThrowStmt } from '@angular/compiler';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subject } from 'rxjs';
@@ -32,6 +33,10 @@ export class ExamCreationComponent implements OnInit, OnChanges, OnDestroy {
     }
     if (changes && changes.selectedAction) {
       if (this.selectedAction == "save") {
+        if(!this.dateExpirationValidation()){
+          this.onExamSaved.emit();
+          return;
+        }
         this._spinner.show(undefined, {
           type: "ball-spin-clockwise",
           size: 'medium',
@@ -131,15 +136,7 @@ export class ExamCreationComponent implements OnInit, OnChanges, OnDestroy {
     this.selectedExam.title = this.selectedExam.title ? this.selectedExam.title : 'بلا عنوان';
   }
   onDateBlur() {
-    //Check if start date before current date
-    this.startDateBeforeCurrent = this.selectedExam.start_date
-      && new Date(this.selectedExam.start_date) < new Date();
-    //Check if end date before current date
-    this.endDateBeforeCurrent = this.selectedExam.end_date
-      && new Date(this.selectedExam.end_date) < new Date();
-    //Check if end date before start date
-    this.endDateBeforeStart = this.selectedExam.start_date && this.selectedExam.end_date
-      && new Date(this.selectedExam.end_date) <= new Date(this.selectedExam.start_date);
+    this.dateExpirationValidation();
     if (this.selectedExam.start_date || this.selectedExam.end_date) {
       this.selectedExam.exercise = false;
       this.selectedExam.answer_shown = false;
@@ -159,5 +156,18 @@ export class ExamCreationComponent implements OnInit, OnChanges, OnDestroy {
     this.selectedExam.questions[questionIndex].selections[selectionIndex].context =
       this.selectedExam.questions[questionIndex].selections[selectionIndex].context ?
         this.selectedExam.questions[questionIndex].selections[selectionIndex].context : 'بلا عنوان';
+  }
+  //Commons
+  private dateExpirationValidation() {
+    //Check if start date before current date
+    this.startDateBeforeCurrent = this.selectedExam.start_date
+      && new Date(this.selectedExam.start_date) < new Date();
+    //Check if end date before current date
+    this.endDateBeforeCurrent = this.selectedExam.end_date
+      && new Date(this.selectedExam.end_date) < new Date();
+    //Check if end date before start date
+    this.endDateBeforeStart = this.selectedExam.start_date && this.selectedExam.end_date
+      && new Date(this.selectedExam.end_date) <= new Date(this.selectedExam.start_date);
+    return !this.startDateBeforeCurrent && !this.endDateBeforeCurrent && !this.endDateBeforeStart;
   }
 }

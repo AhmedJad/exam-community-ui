@@ -1,10 +1,5 @@
 <ngx-spinner></ngx-spinner>
-<div class="exam-creation container-fluid col-md-11">
-    <div class="row">
-        <div class="header mb-4">
-            <h1>نموذج الامتحان</h1>
-            <div>لاضافة اعدادات واسالة الامتحانات</div>
-        </div>
+<div class="exam-creation container">
         <!--form-->
         <form *ngIf="selectedExam&&!selectedExam.folder" class="row">
             <!--Exam settings-->
@@ -30,7 +25,7 @@
                     </ng-container>
                 </div>
             </div>
-            <div class="col-12 mb-3">
+            <div class="col-12 mb-2">
                 <div class="form-check">
                     <input (change)="onExerciseChange($event)" class="form-check-input" type="checkbox"
                         [(ngModel)]="selectedExam.exercise" id="flexCheckDefault" name="exercise">
@@ -97,5 +92,4 @@
                 </ul>
             </div>
         </form>
-    </div>
 </div>

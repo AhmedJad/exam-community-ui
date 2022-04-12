@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subject } from 'rxjs';
@@ -12,8 +12,10 @@ import { TokenService } from '../../services/token.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+  @Input() currentPage = "exam-admin";
   showMenu = false;
   imagePath = "";
+  defaultImage = "assets/images/default.jpg";
   private unsubscribeAll = new Subject();
   constructor(public _token: TokenService,
     private _authClient: AuthClientService,
@@ -28,7 +30,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this._authClient.getCurrentUser().pipe(takeUntil(this.unsubscribeAll))
       .subscribe((user) => {
         this._spinner.hide();
-        this.imagePath = user.image;
+        this.imagePath = user.image ? user.image : this.defaultImage;
       })
   }
   ngOnDestroy(): void {
@@ -45,8 +47,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this._authClient.logout().pipe(takeUntil(this.unsubscribeAll))
       .subscribe(() => {
         this._spinner.hide();
-        this._token.remove();
         this._router.navigate(["auth/login"]);
+        this._token.remove()
       });
   }
   public changeImage(event: any) {
@@ -75,7 +77,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this._authClient.deleteImage().pipe(takeUntil(this.unsubscribeAll))
       .subscribe(() => {
         this._spinner.hide();
-        this.imagePath = "";
+        this.imagePath = this.defaultImage;
       }, (error) => console.log(error))
+  }
+  navigate($event: any, path: any) {
+    $event.preventDefault();
+    this._spinner.show(undefined, {
+      type: "ball-spin-clockwise",
+      size: 'medium',
+      bdColor: 'none'
+    });
+    this._router.navigate([path]);
   }
 }

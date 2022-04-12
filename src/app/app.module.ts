@@ -49,6 +49,12 @@ const routes: Routes = [
     loadChildren: () => import("./exam-administration/exam-administration.module")
     .then(m => m.ExamAdministrationModule),
     canActivate: [AuthenticatedGuard, VerifiedGuard]
+  },
+  {
+    path: 'exam/solution',
+    loadChildren: () => import("./exam-solution/exam-solution.module")
+    .then(m => m.ExamSolutionModule),
+    canActivate: [AuthenticatedGuard, VerifiedGuard]
   }
 ];
 

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'actions',
@@ -17,7 +18,7 @@ export class ActionsComponent implements OnInit {
     { id: 'enter', icon: "fas fa-arrow-right", requireSelection: true, visible: true },
     { id: 'back', icon: "fas fa-arrow-left", visible: false },
   ];
-  constructor() { }
+  constructor(private _router:Router) { }
   ngOnInit(): void {
     this.onActionCreated.emit(this.actions);
   }

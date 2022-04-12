@@ -1,5 +1,4 @@
-<ngx-spinner></ngx-spinner>
-<div class="exam-list-container container" [class.with-title]="selectedExam&&selectedExam.title">
+<div class="exams-list-container container" [class.with-title]="selectedExam&&selectedExam.title">
     <div class="row">
         <div *ngIf="folders.length==0&&files.length==0" class="no-exams text-center">
             <i class="fas fa-file"></i>
@@ -7,14 +6,13 @@
         <ng-container *ngIf="folders.length>0">
             <div *ngIf="folders.length>0" class="header text-secondary">مجلدات</div>
             <div class="item-wrapper col-lg-3 col-md-4" *ngFor="let folder of folders;let i=index">
-                <div (click)="onExamSelected(folder,i,$event)" class="item border">
+                <div (click)="onSelectExam($event,folder)" class="item border">
                     <div class="large-icon">
                         <i class="text-secondary fa-solid fa-folder"></i>
                     </div>
                     <div [class.selected]="selectedExam==folder" class="title">
                         <i class="text-secondary fa-solid fa-folder"></i>
-                        <input [id]="'folders'+folder.id" (focus)="onFocus(folder)" [(ngModel)]=folder.title
-                            (blur)="onBlur(folder)" />
+                        <span>{{folder.title}}</span>
                     </div>
                 </div>
             </div>
@@ -22,14 +20,14 @@
         <ng-container *ngIf="files.length>0">
             <div *ngIf="files.length>0" class="header text-secondary">امتحانات</div>
             <div class="item-wrapper col-lg-3 col-md-4" *ngFor="let file of files;let i=index">
-                <div (click)="onExamSelected(file,i,$event)" class="item border">
+                <div (click)="onSelectExam($event,file)" class="item border">
                     <div class="large-icon">
                         <i class="text-primary fa-solid fa-file"></i>
                     </div>
                     <div [class.selected]="selectedExam==file" class="title">
                         <i class="text-primary fa-solid fa-file"></i>
-                        <input [id]="'files'+file.id" (focus)="onFocus(file)" [(ngModel)]=file.title
-                            (blur)="onBlur(file)" />
+                        <span class="file-text">{{file.title}}</span>
+                        <div class="type mt-2 text-secondary">{{!file.exercise?'امتحان':'تمرين'}}</div>
                     </div>
                 </div>
             </div>
