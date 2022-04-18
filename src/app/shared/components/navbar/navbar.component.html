@@ -1,5 +1,5 @@
 <ngx-spinner></ngx-spinner>
-<nav class="navbar border-bottom navbar-expand-lg navbar-light">
+<nav class="auth-nav navbar navbar-expand-lg navbar-light border-bottom">
     <div class="container-fluid">
         <div class="navbar-brand">
             <div class="user" (clickOutside)="showMenu=false">
@@ -32,14 +32,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link" [class.active]="currentPage=='exam-solution'" href="#"
-                    (click)="navigate($event,'/exam/solution')">
-                    <i class="fas fa-bars"></i>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" [class.active]="currentPage=='exam-solution'" href="/exam/solution">
+                    حل الامتحانات
                 </a>
-                <a class="nav-link" [class.active]="currentPage=='exam-admin'" href="#"
-                    (click)="navigate($event,'/exam/administration')">
-                    <i class="fas fa-gear"></i> 
+                <a class="nav-link" [class.active]="currentPage=='exam-admin'" href="/exam/administration">
+                    ادارة الامتحانات
                 </a>
             </div>
         </div>

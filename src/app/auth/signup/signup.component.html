@@ -1,103 +1,113 @@
 <ngx-spinner></ngx-spinner>
-<div class="signup-box  border col-md-7 m-auto mt-5">
-    <div class="row">
-        <!--main-->
-        <div class="main col-lg-7">
-            <!--Header-->
-            <div class="header">
-                <h1>اضف حساب جديد</h1>
-                <div>لتستمر في التطبيق</div>
+<div class="signup pt-5">
+    <div class="signup-box col-lg-7 col-md-9 m-auto">
+        <div class="row">
+            <!--main-->
+            <div class="main col-lg-8">
+                <!--Header-->
+                <div class="header">
+                    <h6>انشاء حساب جديد</h6>
+                </div>
+                <!--Form-->
+                <form [formGroup]="form">
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">الاسم الاول <span class="text-danger">*</span></label>
+                            <input formControlName="first_name" type="text" class="form-control"
+                                [class.is-invalid]="first_name.invalid&&submitted"
+                                placeholder="ادخل الاسم باللغة بالعربية">
+                            <div class="invalid-feedback">
+                                ادخل الاسم
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">اسم العائلة <span class="text-danger">*</span></label>
+                            <input [class.is-invalid]="last_name.invalid&&submitted" formControlName="last_name"
+                                type="text" class="form-control" placeholder="ادخل الاسم باللغة بالعربية">
+                            <div class="invalid-feedback">
+                                ادخل اسم العائلة
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">البريد الالكتروني <span class="text-danger">*</span></label>
+                        <input formControlName="email" [class.is-invalid]="(email.invalid||emailExist)&&submitted"
+                            type="text" class="form-control" placeholder="ادخل البريد الالكتروني">
+                        <div class="invalid-feedback">
+                            <ng-container *ngIf="email.hasError('required')">
+                                اختار بريد الكتروني
+                            </ng-container>
+                            <ng-container *ngIf="email.hasError('email')">
+                                هذا البريد غير صالح
+                            </ng-container>
+                            <ng-container *ngIf="emailExist">
+                                ادخل بريد الكتروني فريد
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">كلمة المرور <span class="text-danger">*</span></label>
+                            <input formControlName="password" [class.is-invalid]="password.invalid&&submitted"
+                                [type]="passwordHidden?'password':'text'" class="form-control"
+                                placeholder="ادخل كلمة المرور">
+                            <div class="invalid-feedback">
+                                <ng-container *ngIf="password.hasError('pattern')">
+                                    كلمة مرور ضعيفة
+                                </ng-container>
+                                <ng-container *ngIf="password.hasError('required')">
+                                    ادخل كلمة المرور
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">التاكيد <span class="text-danger">*</span></label>
+                            <input formControlName="password_confirmation" placeholder="ادخل كلمة المرور مرة اخرى"
+                                [class.is-invalid]="(password_confirmation.invalid||form.hasError('notMatch'))&&submitted"
+                                [type]="passwordHidden?'password':'text'" class="form-control">
+                            <div class="invalid-feedback">
+                                <ng-container *ngIf="password_confirmation.hasError('required')">
+                                    ادخل كلمة المرور مرة اخرى
+                                </ng-container>
+                                <ng-container
+                                    *ngIf="form.hasError('notMatch')&&!password_confirmation.hasError('required')">
+                                    كلمة المرور غير متطابقة
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-check mt-2 mb-4">
+                        <input (change)="passwordHidden=!passwordHidden" class="form-check-input" type="checkbox"
+                            value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            اظهار كلمة المرور
+                        </label>
+                    </div>
+                </form>
+                <button (click)="register()" class="btn confirm">تسجيل</button>
             </div>
-            <!--Form-->
-            <form [formGroup]="form">
-                <div class="row">
-                    <div class="mb-3 col-md-6">
-                        <label class="form-label">الاسم الاول</label>
-                        <input formControlName="first_name" type="text" class="form-control"
-                            [class.is-invalid]="first_name.invalid&&submitted">
-                        <div class="invalid-feedback">
-                            ادخل الاسم
-                        </div>
-                    </div>
-                    <div class="mb-3 col-md-6">
-                        <label class="form-label">اسم العائلة</label>
-                        <input [class.is-invalid]="last_name.invalid&&submitted" formControlName="last_name" type="text"
-                            class="form-control">
-                        <div class="invalid-feedback">
-                            ادخل اسم العائلة
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">البريد الالكتروني</label>
-                    <input formControlName="email" [class.is-invalid]="(email.invalid||emailExist)&&submitted"
-                        type="text" class="form-control">
-                    <div class="invalid-feedback">
-                        <ng-container *ngIf="email.hasError('required')">
-                            اختار بريد الكتروني
-                        </ng-container>
-                        <ng-container *ngIf="email.hasError('email')">
-                            هذا البريد غير صالح
-                        </ng-container>
-                        <ng-container *ngIf="emailExist">
-                            ادخل بريد الكتروني فريد
-                        </ng-container>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label class="form-label">كلمة المرور</label>
-                        <input formControlName="password" [class.is-invalid]="password.invalid&&submitted"
-                            [type]="passwordHidden?'password':'text'" class="form-control">
-                        <div class="invalid-feedback">
-                            <ng-container *ngIf="password.hasError('pattern')">
-                                كلمة مرور ضعيفة
-                            </ng-container>
-                            <ng-container *ngIf="password.hasError('required')">
-                                ادخل كلمة المرور
-                            </ng-container>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">التاكيد</label>
-                        <input formControlName="password_confirmation"
-                            [class.is-invalid]="(password_confirmation.invalid||form.hasError('notMatch'))&&submitted"
-                            [type]="passwordHidden?'password':'text'" class="form-control">
-                        <div class="invalid-feedback">
-                            <ng-container *ngIf="password_confirmation.hasError('required')">
-                                ادخل كلمة المرور مرة اخرى
-                            </ng-container>
-                            <ng-container
-                                *ngIf="form.hasError('notMatch')&&!password_confirmation.hasError('required')">
-                                كلمة المرور غير متطابقة
-                            </ng-container>
-                        </div>
-                    </div>
-                    <div class="password-hint mt-1 mb-3">
-                        استخدم 8 أحرف أو أكثر مع مزيج من الأحرف والأرقام والرموز
-                    </div>
-                </div>
-                <div class="form-check">
-                    <input (change)="passwordHidden=!passwordHidden" class="form-check-input" type="checkbox" value=""
-                        id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        اظهار كلمة المرور
-                    </label>
-                </div>
-            </form>
-            <div class="footer row mt-5">
-                <div class="col-6">
-                    <a routerLink="/auth/login">تسجيل الدخول بدلا من ذلك</a>
-                </div>
-                <div class="confirm col-6">
-                    <button (click)="register()" class="btn btn-primary">تاكيد</button>
-                </div>
+            <div class="col-lg-4 or-options">
+                <ul>
+                    <li>
+                        <a class="btn btn-outline-primary" routerLink="/home">
+                            <i class="fa-solid fa-home"></i>
+                        </a>
+                        الصفحة الرئيسية
+                    </li>
+                    <li>
+                        <a class="btn btn-outline-success" routerLink="/auth/login">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                        </a>
+                        تسجيل الدخول
+                    </li>
+                    <li>
+                        <a class="btn btn-outline-warning" routerLink="/auth/forget-password">
+                            <i class="fa-solid fa-lock"></i>
+                        </a>
+                        تغير كلمة المرور
+                    </li>
+                </ul>
             </div>
-        </div>
-        <!--Image-->
-        <div class="image col-lg-5 d-none d-lg-block text-center">
-            <img src="assets/images/exam.jpg">
-            <div>حساب واحد يمكنك من الدخول الى مجتمع الامتحانات</div>
         </div>
     </div>
 </div>

@@ -1,37 +1,51 @@
 <ngx-spinner></ngx-spinner>
-<div class="email-verification-box border col-lg-4 col-md-6 m-auto mt-5">
-    <div *ngIf="verificationCodeSent" class="text-center text-success pt-3" role="alert">
-        تم اعادة ارسال رمز التاكيد
-    </div>
-    <!--Header-->
-    <div class="header text-center mt-5">
-        <h1>تاكيد البريد الالكتروني</h1>
-        <div>ادخل رمز التاكيد للدخول الى مجتمع الامتحانات</div>
-    </div>
-    <!--Form-->
-    <form [formGroup]="form">
-        <div class="mb-3">
-            <label class="form-label">رمز التاكيد</label>
-            <input formControlName="verification_code"
-                [class.is-invalid]="(!verificationCodeValid||verification_code.invalid)&&submitted" type="text"
-                class="form-control form-control-lg">
-            <div class="invalid-feedback">
-                <ng-container *ngIf="verification_code.hasError('required')">
-                    ادخل رمز التاكيد
-                </ng-container>
-                <ng-container *ngIf="!verificationCodeValid">
-                    رمز التاكيد غير صحيح
-                </ng-container>
+<div class="resend-verification pt-5">
+    <div class="resend-verification-box col-lg-7 col-md-9 m-auto">
+        <div *ngIf="verificationCodeSent" class="text-center text-success pb-3" role="alert">
+            تم اعادة ارسال رمز التاكيد
+        </div>
+        <div class="row">
+            <!--main-->
+            <div class="main col-lg-8">
+                <!--Header-->
+                <div class="header">
+                    <h6>تاكيد البريد الالكتروني</h6>
+                </div>
+                <!--Form-->
+                <form [formGroup]="form">
+                    <div class="mb-3">
+                        <label class="form-label">رمز التاكيد</label>
+                        <input formControlName="verification_code"
+                            [class.is-invalid]="(!verificationCodeValid||verification_code.invalid)&&submitted"
+                            type="text" class="form-control" placeholder="ادخل رمز التاكيد">
+                        <div class="invalid-feedback">
+                            <ng-container *ngIf="verification_code.hasError('required')">
+                                ادخل رمز التاكيد
+                            </ng-container>
+                            <ng-container *ngIf="!verificationCodeValid">
+                                رمز التاكيد غير صحيح
+                            </ng-container>
+                        </div>
+                    </div>
+                </form>
+                <button (click)="verifyEmail()" class="btn confirm">تاكيد</button>
+            </div>
+            <div class="col-lg-4 or-options">
+                <ul>
+                    <li>
+                        <a (click)="resendVerificationCode($event)" class="btn btn-outline-primary">
+                            <i class="fa-solid fa-envelope"></i>
+                        </a>
+                        اعادة ارسال رمز التاكيد
+                    </li>
+                    <li>
+                        <a (click)="logout()" class="btn btn-outline-success">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        </a>
+                        تسجيل الخروج
+                    </li>
+                </ul>
             </div>
         </div>
-    </form>
-    <div class="footer row mt-5">
-        <div class="col-6">
-            <a (click)="resendVerificationCode($event)" href="#">اعادة ارسال رمز التاكيد</a>
-        </div>
-        <div class="confirm col-6">
-            <button (click)="verifyEmail()" class="btn btn-primary">تاكيد</button>
-        </div>
-        
     </div>
 </div>

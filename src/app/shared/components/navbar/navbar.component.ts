@@ -47,7 +47,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this._authClient.logout().pipe(takeUntil(this.unsubscribeAll))
       .subscribe(() => {
         this._spinner.hide();
-        this._router.navigate(["auth/login"]);
+        this._router.navigate(["home"]);
         this._token.remove()
       });
   }
@@ -79,14 +79,5 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this._spinner.hide();
         this.imagePath = this.defaultImage;
       }, (error) => console.log(error))
-  }
-  navigate($event: any, path: any) {
-    $event.preventDefault();
-    this._spinner.show(undefined, {
-      type: "ball-spin-clockwise",
-      size: 'medium',
-      bdColor: 'none'
-    });
-    this._router.navigate([path]);
   }
 }

@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ExamAdminClientService } from '../exam-administration/exam-admin-client.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private _examAdminClient: ExamAdminClientService) { }
+  constructor(
+    private _title:Title
+  ) { }
 
   ngOnInit(): void {
-    this._examAdminClient.editExam({
-      start_date: "2022-04-07T13:00",
-      questions: [{ 'context': 'x', selections: [{ context: '' }, { context: ''}] }]
-    }).subscribe(() => { }, (error) => console.log(error))
   }
 
 }

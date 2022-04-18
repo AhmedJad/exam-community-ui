@@ -18,13 +18,13 @@ export class GuestGuard implements CanActivate {
     if (!this._token.get()) {
       return of(true);
     }
-    return this._authClient.verifyToken().pipe(
-      map(() => {
-        this._router.navigate(['exam/administration']);
-        return false;
-      },
-      ), catchError((error) => {
-        return of(true);
-      }));
+      return this._authClient.verifyToken().pipe(
+        map(() => {
+          this._router.navigate(['exam/administration']);
+          return false;
+        },
+        ), catchError((error) => {
+          return of(true);
+        }));
   }
 }

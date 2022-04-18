@@ -1,10 +1,7 @@
 <ngx-spinner></ngx-spinner>
 <div class="exam-administration-container">
-    <div class="fixed-section border-bottom">
+    <div class="fixed-section">
         <navbar currentPage="exam-admin"></navbar>
-        <div [class.hidden]="!selectedExam||!selectedExam.title" class="text-secondary exam-title">
-            {{selectedExam?.title}}
-        </div>
         <actions (actions)="actions=$event" (onSelectAction)="onSelectAction($event)" [selectedItem]="selectedExam">
         </actions>
     </div>

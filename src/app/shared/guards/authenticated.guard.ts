@@ -16,7 +16,7 @@ export class AuthenticatedGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (!this._token.get()) {
-      this._router.navigate(['auth/login']);
+      this._router.navigate(['home']);
       return of(false);
     }
     return this._authClient.verifyToken().pipe(
@@ -24,7 +24,7 @@ export class AuthenticatedGuard implements CanActivate {
         return true;
       },
       ), catchError((error) => {
-        this._router.navigate(['auth/login']);
+        this._router.navigate(['home']);
         return of(false);
       }));
   }

@@ -3,8 +3,9 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { pipe, Subject } from 'rxjs';
+import {Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { TokenService } from 'src/app/shared/services/token.service';
 import { AuthClientService } from '../auth-client.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class EmailVerificationComponent implements OnInit, OnDestroy {
     private _authClient: AuthClientService,
     private _router: Router,
     private _spinner: NgxSpinnerService,
-    private _title:Title) {
+    private _title:Title,
+    private _token:TokenService) {
   }
   public get verification_code() {
     return this.form.get("verification_code") as AbstractControl;
@@ -31,7 +33,7 @@ export class EmailVerificationComponent implements OnInit, OnDestroy {
     this.form = this._formBuilder.group({
       verification_code: ['', [Validators.required]]
     });
-    this._title.setTitle("تسجيل الدخول");
+    this._title.setTitle("تاكيد البريد الالكتروني");
   }
   ngOnDestroy(): void {
     this.unsubscribeAll.next();
@@ -60,6 +62,19 @@ export class EmailVerificationComponent implements OnInit, OnDestroy {
           this._spinner.hide();
         }
       })
+  }
+  public logout() {
+    this._spinner.show(undefined, {
+      type: "ball-spin-clockwise",
+      size: 'medium',
+      bdColor: 'none'
+    });
+    this._authClient.logout().pipe(takeUntil(this.unsubscribeAll))
+      .subscribe(() => {
+        this._spinner.hide();
+        this._router.navigate(["home"]);
+        this._token.remove()
+      });
   }
   public resendVerificationCode($event: any) {
     this.verificationCodeSent = false;

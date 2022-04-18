@@ -3,13 +3,9 @@
         position: fixed;
         background: white;
         width: 100%;
-        z-index: 999;
+        z-index: 1000;
     }
     .hidden {
         display: none;
-    }
-    .exam-title {
-        padding: 15px 18px 0px 0;
-        font-weight: bold;
     }
 }

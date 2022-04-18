@@ -1,5 +1,14 @@
 .exam-creation {
-    padding-top: 170px;
+    padding-top: 125px;
+    @media (max-width:576px) {
+        padding: 125px 30px 0 30px;
+    }
+    form {
+        padding: 20px;
+    }
+    .form-control,.form-select {
+        border-radius: 0;
+    }
     ul {
         padding: 0;
         margin: 0;
@@ -18,19 +27,32 @@
         text-align: left;
     }
     .form-check {
+        margin-left: 10px;
         display: inline-block !important;
+        input {
+            border-radius: 0;
+        }
     }
     .questions-navs {
         > i {
             padding-left: 5px;
         }
     }
-    .image {
+    .settings,.questions{
+        border-right: 1px solid #dee2e6!important;;
+    }
+    .title {
+        border-style: none;
+        padding: 0;
+        background: none;
+        display: inline-block;
+        text-align: center;
         position: relative;
-        top: 50px;
-        img {
-            width: 60%;
-            margin-left: 55px;
+        z-index: 999;
+        left:22px;
+        background-color: #fff;
+        i{
+            font-size: 20px;
         }
     }
 }

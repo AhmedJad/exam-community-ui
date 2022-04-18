@@ -15,6 +15,7 @@ export class ExamCreationComponent implements OnInit, OnChanges, OnDestroy {
   @Input() selectedExam: any = null;
   @Input() selectedAction: any = null;
   @Output() onExamSaved = new EventEmitter();
+  settingsView = true;
   initSelectedExam: any = null;
   questionNumber = 1;
   startDateBeforeCurrent = false;
@@ -33,7 +34,7 @@ export class ExamCreationComponent implements OnInit, OnChanges, OnDestroy {
     }
     if (changes && changes.selectedAction) {
       if (this.selectedAction == "save") {
-        if(!this.dateExpirationValidation()){
+        if (!this.dateExpirationValidation()) {
           this.onExamSaved.emit();
           return;
         }

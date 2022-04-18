@@ -2,10 +2,7 @@
 <div class="exam-solution-container">
     <div class="fixed-section">
         <navbar currentPage="exam-solution"></navbar>
-        <div class="border-bottom" [class.hidden]="!selectedUser">
-            <div [class.hidden]="!selectedExam||!selectedExam.title" class="text-secondary exam-title">
-                {{selectedExam?.title}}
-            </div>
+        <div [class.hidden]="!selectedUser">
             <actions [examListHidden]="examListHidden" (onSelectAction)="onActionSelected($event)"
                 [selectedExam]="selectedExam"></actions>
 

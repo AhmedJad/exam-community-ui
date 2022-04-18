@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { NavbarModule } from './shared/components/navbar/navbar.module';
 import { AuthenticatedGuard } from './shared/guards/authenticated.guard';
 import { GuestGuard } from './shared/guards/guest.guard';
 import { VerifiedGuard } from './shared/guards/verified.guard';
@@ -42,7 +43,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import("./home/home.module").then(m => m.HomeModule),
-    canActivate: [AuthenticatedGuard, VerifiedGuard]
+    canActivate: [GuestGuard]
   },
   {
     path: 'exam/administration',

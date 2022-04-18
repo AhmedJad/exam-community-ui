@@ -1,4 +1,3 @@
-import { ChangeDetectionStrategy } from '@angular/compiler/src/compiler_facade_interface';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
