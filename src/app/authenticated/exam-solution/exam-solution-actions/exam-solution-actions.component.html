@@ -1,0 +1,8 @@
+<ul class="actions">
+    <ng-container *ngFor="let action of actions">
+        <li class="action" (click)="onActionSelected($event,action.id)"
+            *ngIf="actionVisible(action)">
+            <i class="text-secondary" [class]="action.icon"></i>
+        </li>
+    </ng-container>
+</ul>

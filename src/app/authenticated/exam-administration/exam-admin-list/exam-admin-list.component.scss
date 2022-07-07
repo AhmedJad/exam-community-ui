@@ -1,0 +1,63 @@
+.exam-list-container {
+    padding-top: 125px;
+    .link-to-solution {
+        display: inline-block;
+        text-decoration: none;
+    }
+    input {
+        position: relative;
+        bottom: 2px;
+        border-style: none;
+        display: inline-block;
+        width: 70%;
+        background-color: inherit;
+        &:focus {
+            outline: none;
+        }
+    }
+    .header {
+        font-size: 11px;
+    }
+    .item-wrapper {
+        padding: 10px;
+        .item {
+            box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+            &:hover {
+                cursor: pointer;
+            }
+            border-radius: 5px;
+            .large-icon {
+                padding-bottom: 25px;
+                text-align: center;
+                margin-top: 44px;
+                i {
+                    font-size: 50px;
+                }
+            }
+            .title {
+                padding: 18px 15px;
+                margin-top: 10px;
+                i {
+                    font-size: 20px;
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+    .selected {
+        background-color: #e8e8ff;
+        input {
+            color: #0d6efd;
+        }
+    }
+    .no-exams {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        i {
+            font-size: 200px;
+            color: #dee2e6;
+        }
+    }
+}

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { AuthClientService } from 'src/app/auth/auth-client.service';
+import { AuthClientService } from 'src/app/guest/auth/auth-client.service';
 import { TokenService } from '../services/token.service';
 
 @Injectable({
@@ -20,7 +20,7 @@ export class GuestGuard implements CanActivate {
     }
       return this._authClient.verifyToken().pipe(
         map(() => {
-          this._router.navigate(['exam/administration']);
+          this._router.navigate(['/exam-admin']);
           return false;
         },
         ), catchError((error) => {

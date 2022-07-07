@@ -1,0 +1,13 @@
+<ngx-spinner></ngx-spinner>
+<div class="exam-administration-container">
+    <div class="fixed-section">
+        <exam-admin-actions (actions)="actions=$event" (onSelectAction)="onSelectAction($event)" [selectedItem]="selectedExam">
+        </exam-admin-actions>
+    </div>
+    <exam-admin-list [examCreationHidden]="examCreationHidden" [deleteActionClicked]="deleteActionClicked"
+        (onExamDeleted)="deleteActionClicked=false" [newExam]="newExam" [exams]="exams"
+        (onSelectExam)="onSelectExam($event)" [class.hidden]="!examCreationHidden">
+    </exam-admin-list>
+    <exam-creation (onExamSaved)="selectedAction=''" [selectedAction]="selectedAction" [selectedExam]="selectedExam"
+        [class.hidden]="examCreationHidden"></exam-creation>
+</div>

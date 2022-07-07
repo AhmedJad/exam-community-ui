@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { AuthClientService } from 'src/app/auth/auth-client.service';
+import { AuthClientService } from 'src/app/guest/auth/auth-client.service';
 import { TokenService } from '../services/token.service';
 
 @Injectable({
@@ -20,7 +20,7 @@ export class VerifiedGuard implements CanActivate {
         return true;
       },
       ), catchError((error) => {
-        this._router.navigate(['auth/verify-email']);
+        this._router.navigate(['email-verification']);
         return of(false);
       }));
   }

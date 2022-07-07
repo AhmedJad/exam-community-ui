@@ -1,0 +1,16 @@
+<ngx-spinner></ngx-spinner>
+<div class="exam-solution-container">
+    <div class="fixed-section">
+        <div [class.hidden]="!selectedUser">
+            <exam-solution-actions [examListHidden]="examListHidden" (onSelectAction)="onActionSelected($event)"
+                [selectedExam]="selectedExam"></exam-solution-actions>
+
+        </div>
+    </div>
+    <users-list [class.hidden]="selectedUser" (onUserSelected)="onUserSelected($event)"></users-list>
+    <exam-solution-list (filesTrace)="filesTrace=$event" [selectedAction]="selectedAction" [selectedUser]="selectedUser"
+        [class.hidden]="!selectedUser
+        ||(examListHidden)" (onExamSelected)="onExamSelected($event)" [examListHidden]="examListHidden"></exam-solution-list>
+    <solution (onExamSolved)="selectedAction=''" [selectedAction]="selectedAction" [selectedExam]="selectedExam"
+        [class.hidden]="!selectedUser||!examListHidden"></solution>
+</div>

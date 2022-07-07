@@ -1,0 +1,62 @@
+.login {
+    background-color: #eceff4;
+    padding: 100px 0;
+    height: 100vh;
+    @media (max-width: 767px) {
+        //For small devices
+        & {
+            background-color: #fff;
+        }
+    }
+    .login-box {
+        background-color: #fff;
+        input {
+            background-color: #f7f9fc;
+            border-radius: 0;
+            padding: 7px;
+            border: 1px solid #aaafb9;
+        }
+        padding: 36px;
+        .header {
+            margin-bottom: 22px;
+        }
+        .password-hint {
+            font-size: 14px;
+            color: #5f6368;
+        }
+        .confirm {
+            width: 150px;
+            border-radius: 0;
+            color: #fff;
+            background-color: #2caae2 !important;
+        }
+        .form-check {
+            label {
+                position: relative;
+                top: 2px;
+            }
+            input {
+                border-radius: 0;
+            }
+        }
+        .or-options {
+            padding-top: 78px;
+            ul {
+                padding: 0;
+                list-style: none;
+                li {
+                    padding-bottom: 10px;
+                }
+                a {
+                    margin-left: 5px;
+                    text-decoration: none;
+                    border-radius: 0;
+                    width: 45px;
+                    i {
+                        color: inherit;
+                    }
+                }
+            }
+        }
+    }
+}

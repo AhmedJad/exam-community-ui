@@ -3,9 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-
 import { AppComponent } from './app.component';
-import { NavbarModule } from './shared/components/navbar/navbar.module';
 import { AuthenticatedGuard } from './shared/guards/authenticated.guard';
 import { GuestGuard } from './shared/guards/guest.guard';
 import { VerifiedGuard } from './shared/guards/verified.guard';
@@ -13,49 +11,14 @@ import { TokenInterceptorService } from './shared/services/token-interceptor.ser
 
 const routes: Routes = [
   {
-    path: 'auth/signup',
-    loadChildren: () => import("./auth/signup/signup.module").then(m => m.SignupModule),
+    path: '',
+    loadChildren: () => import("./shared/layouts/guest/guest.module").then(m => m.GuestModule),
     canActivate: [GuestGuard]
   },
   {
-    path: 'auth/login',
-    loadChildren: () => import("./auth/login/login.module").then(m => m.LoginModule),
-    canActivate: [GuestGuard]
-  },
-  {
-    path: 'auth/verify-email',
-    loadChildren: () => import("./auth/email-verification/email-verification.module")
-      .then(m => m.EmailVerificationModule),
+    path: '',
+    loadChildren: () => import("./shared/layouts/authenticated/authenticated.module").then(m => m.AuthenticatedModule),
     canActivate: [AuthenticatedGuard]
-  },
-  {
-    path: 'auth/forget-password',
-    loadChildren: () => import("./auth/forget-password/forget-password.module")
-      .then(m => m.ForgetPasswordModule),
-    canActivate: [GuestGuard]
-  },
-  {
-    path: 'auth/reset-password/:token',
-    loadChildren: () => import("./auth/reset-password/reset-password.module")
-      .then(m => m.ResetPasswordModule),
-    canActivate: [GuestGuard]
-  },
-  {
-    path: 'home',
-    loadChildren: () => import("./home/home.module").then(m => m.HomeModule),
-    canActivate: [GuestGuard]
-  },
-  {
-    path: 'exam/administration',
-    loadChildren: () => import("./exam-administration/exam-administration.module")
-    .then(m => m.ExamAdministrationModule),
-    canActivate: [AuthenticatedGuard, VerifiedGuard]
-  },
-  {
-    path: 'exam/solution',
-    loadChildren: () => import("./exam-solution/exam-solution.module")
-    .then(m => m.ExamSolutionModule),
-    canActivate: [AuthenticatedGuard, VerifiedGuard]
   }
 ];
 

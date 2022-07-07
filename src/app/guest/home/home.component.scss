@@ -1,0 +1,54 @@
+.home {
+    .show-case {
+        h1{
+            &,span{
+                font-size: 25px;
+            }
+        }
+        a{
+            font-size: 20px;
+        }
+        p{
+            font-size: 17px;
+        }
+        padding-top: 100px;
+        padding-bottom: 20px;
+        a {
+            transition: 0.7s ease;
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+    .services {
+        padding: 100px 0;
+        .title {
+            color: #3a6cf4;
+            font-size: 20px;
+        }
+        .service-card {
+            width: 270px;
+            margin: 0 0 25px 25px;
+            padding: 25px 15px 0 15px;
+            border-style: none;
+            transition: 0.7s ease;
+            .service-card-title {
+                color: #3a6cf4;
+                font-size: 15px;
+            }
+            .service-card-icon {
+                color: #3a6cf4;
+                font-size: 4em;
+                margin-top: 5px;
+                margin-bottom: 25px;
+            }
+            .service-card-text {
+                font-weight: 400;
+                font-size: 15px;
+            }
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }    
+}
